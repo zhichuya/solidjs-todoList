@@ -1,4 +1,6 @@
 {
+    "include": ["src/**/*"],
+    "exclude": [],
     "compilerOptions": {
         "strict": true,
         "target": "ESNext",
