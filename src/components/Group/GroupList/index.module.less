@@ -1,0 +1,71 @@
+.groupContainer {
+    height: 100%;
+    font-size: 14px;
+    color: #73767d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f3f4f6;
+    .groupList {
+        .groupItem {
+            display: flex;
+            align-items: center;
+            height: 38px;
+            line-height: 38px;
+            border-radius: 3px;
+            padding-left: 10px;
+            .groupIcon {
+                height: 14px;
+            }
+            .groupTodoCount {
+                margin-left: auto;
+                margin-right: 10px;
+            }
+            .groupTitle {
+                margin-left: 6px;
+            }
+            &.active {
+                background-color: #dfe4f1;
+            }
+        }
+    }
+    .groupBlank {
+        flex: 1;
+    }
+    .groupOperate {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-top: 1px solid #dddddd;
+        .groupAdd {
+            display: flex;
+            align-items: center;
+            height: 38px;
+            line-height: 38px;
+            border-radius: 3px;
+            padding-left: 10px;
+            .groupIcon {
+                height: 14px;
+            }
+            .groupTitle {
+                margin-left: 6px;
+            }
+            &:hover {
+                color: #7084c5;
+            }
+        }
+    }
+
+    // 自定义菜单
+    .menuList {
+        width: 80px;
+        font-size: 12px;
+        color: #595959;
+        .menuItem {
+            line-height: 1;
+            padding-bottom: 8px;
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+    }
+}
