@@ -2,10 +2,12 @@ import {Accessor, Show, createSignal, useContext} from 'solid-js';
 import {For} from 'solid-js/web';
 import {v4 as uuidV4} from 'uuid';
 
+import addIcon from '../../../assets/add.svg';
 import todoIcon from '../../../assets/todo.svg';
 import {AppContext} from '../../../context';
 import {groupList} from '../../../context/initData';
 import {TAccessContextValue, TAppContext} from '../../../types';
+import CustomMenu from '../../CustomMenu';
 import EditGroup from '../EditGroup';
 import style from './index.module.less';
 
@@ -15,7 +17,7 @@ interface Props {
 }
 
 function GroupList({activeGroup, changeActiveGroup}: Props) {
-    const [appState, {editGroup, addGroup}] = useContext(AppContext) as TAppContext;
+    const [appState, {editGroup, addGroup, deleteGroup}] = useContext(AppContext) as TAppContext;
     const [editIdx, setEditIdx] = createSignal(-1);
     const [showContextMenu, setShowContextMenu] = createSignal(false);
     const [contextmenuIdx, setContextmenuIdx] = createSignal(-1);
@@ -100,6 +102,36 @@ function GroupList({activeGroup, changeActiveGroup}: Props) {
             </div>
             {/* 点击空白处添加一个新分组 */}
             <div class={style.groupBlank} onDblClick={handleShowAddGroup} />
+            {/* 分组操作 */}
+            <div class={style.groupOperate}>
+                <div class={style.groupAdd} onClick={handleShowAddGroup}>
+                    <img class={style.groupIcon} src={addIcon} />
+                    <div class={style.groupTitle}>添加分组</div>
+                </div>
+            </div>
+            {/* 自定义菜单：展示菜单 && (右击Idx === 当前激活的activeGroup)  ==> 在激活处右击菜单方可展示 */}
+            <Show when={showContextMenu() && contextmenuIdx() == activeGroup()}>
+                <CustomMenu>
+                    <div class={style.menuList}>
+                        <div
+                            class={style.menuItem}
+                            onClick={() => {
+                                setEditIdx(contextmenuIdx());
+                            }}
+                        >
+                            编辑
+                        </div>
+                        <div
+                            class={style.menuItem}
+                            onClick={() => {
+                                deleteGroup(appState().groupList[contextmenuIdx()]);
+                            }}
+                        >
+                            删除
+                        </div>
+                    </div>
+                </CustomMenu>
+            </Show>
         </div>
     );
 }

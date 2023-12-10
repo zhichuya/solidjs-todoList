@@ -24,8 +24,6 @@ export function AppProvider(props: ParentProps) {
                 setState({todoList, groupList: [...groupList, group]});
             },
             editGroup: (oldGroup: TGroup, newGroup: TGroup) => {
-                console.log(oldGroup, newGroup);
-
                 const {groupList, todoList} = state();
                 setState({
                     todoList,
