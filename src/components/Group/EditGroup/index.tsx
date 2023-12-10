@@ -38,8 +38,8 @@ function EditGroup({value, isFocused, onChange}: Props) {
                     value={value}
                     ref={ref}
                     onBlur={(e: Event) => {
-                        const {value} = e.target as HTMLInputElement;
-                        value && onChange(value);
+                        const {value = ''} = e.target as HTMLInputElement;
+                        onChange(value);
                     }}
                 />
             </form>

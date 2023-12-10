@@ -13,7 +13,7 @@ import {groupList, todoList} from './initData';
 
 export const AppContext = createContext<TAppContext>();
 
-export function GroupListProvider(props: ParentProps) {
+export function AppProvider(props: ParentProps) {
     const [state, setState] = createSignal<TContextValue>({groupList, todoList});
 
     const value: TAppContext = [
