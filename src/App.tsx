@@ -2,6 +2,7 @@ import {createSignal} from 'solid-js';
 
 import style from './App.module.less';
 import Group from './components/Group/GroupList';
+import TodoList from './components/Todo/TodoList';
 import {AppProvider} from './context';
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
                     <Group activeGroup={activeGroup} changeActiveGroup={changeActiveGroup} />
                 </div>
                 <div class={style.rightSide}>
-                    {/* <TodoList {groupList} {todoList} {activeGroup} {editedTodo} {addTodo} {deleteTodo} /> */}
+                    <TodoList activeGroup={activeGroup} />
                 </div>
             </div>
         </AppProvider>

@@ -1,0 +1,62 @@
+.todoListContainer {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .operationContainer {
+            .operationAddIcon {
+                width: 20px;
+            }
+        }
+    }
+    .todoList {
+        padding-top: 10px;
+        .todoItem {
+            height: 40px;
+            display: flex;
+            font-size: 14px;
+            margin-top: 10px;
+            border-radius: 5px;
+            align-items: center;
+            box-sizing: border-box;
+            background-color: #fff;
+            &.clickTodo {
+                border: 1px solid #6f84c5;
+            }
+            .checkbox {
+                margin-left: 10px;
+                border: 1 solid #d9d9d9;
+            }
+            .todoText {
+                flex: 1;
+                margin-left: 8px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                &.todoPending {
+                    color: #595959;
+                }
+                &.todoFinish {
+                    color: #aaaaaa;
+                    text-decoration: line-through;
+                }
+            }
+        }
+    }
+    // 自定义菜单
+    .menuList {
+        width: 80px;
+        font-size: 12px;
+        color: #595959;
+        .menuItem {
+            line-height: 1;
+            padding-bottom: 8px;
+            &:last-child {
+                padding-bottom: 0;
+            }
+        }
+    }
+}
