@@ -2,11 +2,12 @@
  * @Author: zhichuya 1830695417@qq.com
  * @Date: 2023-12-10
  * @LastEditors: zhichuya 1830695417@qq.com
- * @LastEditTime: 2024-01-07
+ * @LastEditTime: 2024-07-08
  * @FilePath: /solidjs-todoList/src/components/Todo/TodoList/index.tsx
  * @Description: TodoList组件
  */
-import {Accessor, createEffect, createSignal, splitProps, useContext} from 'solid-js';
+import {Accessor, createSignal, useContext} from 'solid-js';
+import {v4 as uuidV4} from 'uuid';
 
 import AddIcon from '../../../assets/add.svg';
 import {TODO_STATUS_FINISH, TODO_STATUS_PENDING} from '../../../constants';
@@ -28,7 +29,7 @@ function TodoList(props: Props) {
     const [showContextMenu, setShowContextMenu] = createSignal<boolean>(false);
     const [contextmenuId, setContextmenuId] = createSignal<string>('');
 
-    const [appState, {editGroup, addGroup, deleteGroup, editTodo}] = useContext(AppContext) as TAppContext;
+    const [appState, {editGroup, addGroup, deleteGroup, editTodo, addTodo}] = useContext(AppContext) as TAppContext;
 
     const currGroup = () => {
         return appState().groupList[props.activeGroup()];
@@ -59,6 +60,17 @@ function TodoList(props: Props) {
     const handleEditTodo = (oldTodo: TTodo, newTodo: TTodo) => {
         editTodo(oldTodo, newTodo);
         setEditingTodoId('');
+    };
+    // 添加todo
+    const handleAddTodo = (text: string) => {
+        const todo: TTodo = {
+            text,
+            id: uuidV4(),
+            groupId: currGroup().id,
+            status: TODO_STATUS_PENDING
+        };
+        addTodo(todo);
+        setIsAddingTodo(false);
     };
 
     // 根据 todo 的状态计算 className
@@ -119,7 +131,7 @@ function TodoList(props: Props) {
                                 }}
                             />
                             {editingTodoId() !== todo.id ? (
-                                <div class={`${style.todoText}` + computeClassName(todo)}>{todo.text}</div>
+                                <div class={`${style.todoText} ` + computeClassName(todo)}>{todo.text}</div>
                             ) : (
                                 <div class={style.todoText}>
                                     <EditTodo
@@ -139,6 +151,19 @@ function TodoList(props: Props) {
                         </div>
                     );
                 })}
+                {isAddingTodo() && (
+                    <div class={style.todoItem}>
+                        <div class={style.addTodoItem}>
+                            <EditTodo
+                                value=""
+                                isFocused={true}
+                                onChange={(text: string) => {
+                                    handleAddTodo(text);
+                                }}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
