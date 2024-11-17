@@ -2,7 +2,7 @@
  * @Author: zhichuya 1830695417@qq.com
  * @Date: 2024-01-07
  * @LastEditors: zhichuya 1830695417@qq.com
- * @LastEditTime: 2024-01-07
+ * @LastEditTime: 2024-11-17
  * @FilePath: /solidjs-todoList/src/components/Todo/EditTodo/index.tsx
  * @Description: 编辑todo
  */
@@ -39,7 +39,7 @@ const EditTodo = (props: Props) => {
                 <input
                     value={props.value}
                     ref={inputElement}
-                    onChange={onChange}
+                    onBlur={onChange}
                     onKeyUp={handleKeyup}
                     class={style.todoEditInput}
                     placeholder="添加一个Todo"

@@ -2,7 +2,7 @@
  * @Author: zhichuya 1830695417@qq.com
  * @Date: 2023-12-10
  * @LastEditors: zhichuya 1830695417@qq.com
- * @LastEditTime: 2024-07-08
+ * @LastEditTime: 2024-11-17
  * @FilePath: /solidjs-todoList/src/components/Todo/TodoList/index.tsx
  * @Description: TodoList组件
  */
@@ -63,6 +63,11 @@ function TodoList(props: Props) {
     };
     // 添加todo
     const handleAddTodo = (text: string) => {
+        if (!text) {
+            setIsAddingTodo(false);
+            return;
+        }
+
         const todo: TTodo = {
             text,
             id: uuidV4(),
